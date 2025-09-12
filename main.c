@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <SDL2/SDL.h>
-#include <glad/glad.h>
+#include <SDL.h>
+#include <glad.h>
 
 const int WIDTH = 800, HEIGHT = 600;
 
@@ -13,8 +13,20 @@ int main( int argc, char *argv[] ) {
         printf("SDL_Init Error: %s\n", SDL_GetError());
         return 1;
     }
+    else {
+        printf("SDL Window is ready to run!");
+    }
 
-    window = SDL_CreateWindow("SDL2 Tutorial", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+    //Before we create our window, we need to spicify our OpenGL version
+    SDL_GL_SetAttribute(SDL_GL_Context, int value);
+
+    //Request a window to be created for our platform
+    window = SDL_CreateWindow("SDL2 Tutorial",
+                              SDL_WINDOWPOS_CENTERED,
+                              SDL_WINDOWPOS_CENTERED,
+                              640,
+                              480,
+                              SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
     if (!window) {
         printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
@@ -27,6 +39,7 @@ int main( int argc, char *argv[] ) {
         cntkd = 0;
 
     //The event Loop
+    //infinite loop for our application 
     while (gameIsRunning) {
         SDL_Event event;
         // Start of our event loop
